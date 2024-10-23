@@ -231,7 +231,11 @@ But it was #{server}.
   # Return the current prefix key.
   def prefix_key
     if @struct.prefix_key.size > 0
-      @struct.prefix_key[0..-1 - options[:prefix_delimiter].size]
+      if options[:prefix_delimiter]
+        @struct.prefix_key[0..-1 - options[:prefix_delimiter].size]
+      else
+        @struct.prefix_key
+      end
     else
       ""
     end
